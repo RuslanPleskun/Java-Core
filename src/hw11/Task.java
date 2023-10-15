@@ -1,17 +1,6 @@
 package src.hw11;
 
 public class Task {
-
-    public static int checkFileExtension(String fileName) throws InvalidFileException {
-        if (fileName == null || fileName.isEmpty()) {
-            throw new InvalidFileException("File name is null or empty.");
-        } else if (fileName.endsWith(".java")) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
     public static void main(String[] args) {
         try {
             Student student1 = new Student("Mike", new String[]{"code.java", "homework.txt", "program.c", "report.pdf", "assignment.py"});
@@ -24,7 +13,7 @@ public class Task {
             for (Student student : students) {
                 for (String file : student.getFiles()) {
                     try {
-                        int points = checkFileExtension(file);
+                        int points = student.checkFileExtension(file);
                         student.updateScore(points);
                     } catch (InvalidFileException e) {
                         System.out.printf("Error for student %s: %s%n", student.getName(), e.getMessage());
@@ -37,5 +26,4 @@ public class Task {
             System.out.printf("An error occurred: %s%n", e.getMessage());
         }
     }
-
 }

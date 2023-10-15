@@ -12,7 +12,7 @@ public class Student {
     }
 
     public int getScore() {
-        return this.score;
+        return score;
     }
 
     public String getName() {
@@ -20,10 +20,20 @@ public class Student {
     }
 
     public void updateScore(int points) {
-        this.score += points;
+        score += points;
     }
 
     public String[] getFiles() {
         return files;
+    }
+
+    public int checkFileExtension(String fileName) throws InvalidFileException {
+        if (fileName == null || fileName.isEmpty()) {
+            throw new InvalidFileException("File name is null or empty.");
+        } else if (fileName.endsWith(".java")) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
