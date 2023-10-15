@@ -1,6 +1,7 @@
 package src.hw13;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.concurrent.Semaphore;
@@ -33,7 +34,7 @@ public class Car implements Serializable {
 
             System.out.println("Car is assembled and saved to car.ser");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("An InterruptedException occurred: " + e.getMessage());
         } finally {
             assemblyLine.release(3);
         }
@@ -43,8 +44,8 @@ public class Car implements Serializable {
         try (FileOutputStream fileOut = new FileOutputStream("car.ser");
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(car);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Error saving car to file: " + e.getMessage());
         }
     }
 }
